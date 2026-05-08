@@ -77,4 +77,4 @@ show_confirm" data-konf-delete="{{ $row->nama }}" title='Hapus Data'>
 </div> 
  
 <!-- contentAkhir --> 
-@endsection 
+@endsection

@@ -7,6 +7,10 @@ class ImageHelper
     public static function uploadAndResize($file, $directory, $fileName, $width = null, $height = null)
     {
         $destinationPath = public_path($directory);
+
+if (!file_exists($destinationPath)) {
+    mkdir($destinationPath, 0777, true);
+}
         $extension = strtolower($file->getClientOriginalExtension());
         $image = null;
 
