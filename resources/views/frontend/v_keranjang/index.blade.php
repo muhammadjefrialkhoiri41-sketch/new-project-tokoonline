@@ -17,6 +17,11 @@
                    class="btn btn-danger btn-sm">
                     Hapus
                 </a>
+
+                <a href="{{ route('checkout.form') }}"
+                   class="btn btn-success">
+                   Checkout
+                </a>
             </div>
         @endforeach
 

@@ -53,6 +53,8 @@ Route::prefix('v1')->group(function () {
         });
 
         Route::get('/cek-pesanan', [PesananController::class, 'cekPesanan'])->name('cek.pesanan');
+        Route::get('/checkout', [KeranjangController::class, 'checkoutForm'])->name('checkout.form');
+        Route::post('/checkout', [KeranjangController::class, 'checkout'])->name('checkout');
     });
 
      Route::prefix('keranjang')->name('keranjang.')->group(function () {

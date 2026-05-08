@@ -91,8 +91,8 @@
         <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
             <div class="container px-4 px-lg-5">
                 <a class="navbar-brand fw-bold" href="{{ route('home') }}">
-                    JEFFLOID
-                </a>
+                jeffloid
+            </a>
 
                 <div class="ms-auto d-flex align-items-center">
 
