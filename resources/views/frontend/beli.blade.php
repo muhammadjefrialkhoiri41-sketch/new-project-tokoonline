@@ -59,7 +59,7 @@
                             </h3>
 
                             {{-- VALIDASI PROFIL --}}
-                            @if(!auth('customer')->user()->phone || !auth('customer')->user()->address)
+                            @if(!auth('customer')->check() || !auth('customer')->user()->phone || !auth('customer')->user()->address)
                                 <div class="alert alert-danger">
                                     Lengkapi profil dulu sebelum checkout!
                                     <a href="{{ route('profile') }}">Klik disini</a>
