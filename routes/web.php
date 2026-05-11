@@ -69,6 +69,7 @@ Route::prefix('v1')->group(function () {
         Route::post('/profile', [ProfileController::class, 'update'])
             ->name('profile.update');
 
+
         // PESANAN
         Route::prefix('pesanan')
             ->name('pesanan.')
@@ -83,6 +84,11 @@ Route::prefix('v1')->group(function () {
 
         Route::get('/cek-pesanan', [PesananController::class, 'cekPesanan'])
             ->name('cek.pesanan');
+
+        Route::get('/cek-pesanan', [PesananController::class, 'cekPesanan'])->name('cek.pesanan');
+        Route::get('/checkout', [KeranjangController::class, 'checkoutForm'])->name('checkout.form');
+        Route::post('/checkout', [KeranjangController::class, 'checkout'])->name('checkout');
+
     });
 
     /*
