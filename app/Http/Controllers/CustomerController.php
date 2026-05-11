@@ -2,48 +2,41 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Customer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Laravel\Socialite\Facades\Socialite;
 
 class CustomerController extends Controller
 {
-    public function redirect()
+    // FORM LOGIN
+    public function login()
     {
-        return Socialite::driver('google')
-            ->with(['prompt' => 'select_account'])
-            ->redirect();
+        return view('frontend.auth.login');
     }
 
-    public function callback()
+    // PROSES LOGIN
+    public function authenticate(Request $request)
     {
-        $socialUser = Socialite::driver('google')->user();
+        $credentials = $request->validate([
+            'email'    => ['required', 'email'],
+            'password' => ['required'],
+        ]);
 
-        $customer = Customer::where('email', $socialUser->email)->first();
+        // cek login customer
+        if (Auth::guard('customer')->attempt($credentials)) {
 
-        if (!$customer) {
-            $customer = Customer::create([
-                'name'         => $socialUser->name,
-                'email'        => $socialUser->email,
-                'password'     => null,
-                'google_id'    => $socialUser->id,
-                'google_token' => $socialUser->token,
-                'status'       => 'active',
-            ]);
-        } else {
-            $customer->update([
-                'google_id'    => $socialUser->id,
-                'google_token' => $socialUser->token,
-            ]);
+            // regenerate session
+            $request->session()->regenerate();
+
+            return redirect()->route('home');
         }
 
-        Auth::guard('customer')->login($customer);
-        request()->session()->regenerate();
-
-        return redirect()->route('home');
+        // jika gagal
+        return back()->with([
+            'error' => 'Email atau password salah'
+        ]);
     }
 
+    // LOGOUT
     public function logout(Request $request)
     {
         Auth::guard('customer')->logout();

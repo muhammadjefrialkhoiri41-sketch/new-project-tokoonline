@@ -108,9 +108,9 @@
                             </button>
                         </form>
                     @else
-                        <a href="{{ route('auth.redirect') }}" class="btn btn-danger btn-sm">
-                            Login Google
-                        </a>
+                        <a href="{{ route('auth.login') }}" class="btn btn-primary btn-sm">
+                               Login
+                    </a>
                     @endauth
 
                 </div>
